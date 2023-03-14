@@ -19,6 +19,10 @@
     "tjw-sasslint-rules": "^2.1.0"
   },
   "keywords": [],
-  "author": "TheJaredWilcurt/Gwendolyn Faraday",
-  "license": "MIT"
+  "author": "Mateus Sartorio",
+  "license": "MIT",
+  "engines": {
+    "node": "^16.19.1",
+    "npm": "^8.19.3"
+  }
 }
