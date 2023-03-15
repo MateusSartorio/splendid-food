@@ -65,13 +65,13 @@
                     <label>Quantity:</label>
                   </div>
                   <div class="cell">
-                    <input type="number" v-model="inventory.carrots">
+                    <input type="number" v-model.number="inventory.carrots">
                   </div>
                 </div>
               </form>
             </div>
             <div class="card-footer">
-              <button class="btn btn-light">Add to cart</button>
+              <button class="btn btn-light" @click="addToCart('carrots', inventory.carrots)">Add to cart</button>
             </div>
           </div>
 
@@ -103,13 +103,13 @@
                     <label>Quantity:</label>
                   </div>
                   <div class="cell">
-                    <input type="number" v-model="inventory.pineapples">
+                    <input type="number" v-model.number="inventory.pineapples">
                   </div>
                 </div>
               </form>
             </div>
             <div class="card-footer">
-              <button class="btn btn-light">Add to cart</button>
+              <button @click="addToCart('pineapples', inventory.pineapples)" class="btn btn-light">Add to cart</button>
             </div>
           </div>
 
@@ -141,13 +141,13 @@
                     <label>Quantity:</label>
                   </div>
                   <div class="cell">
-                    <input type="number" v-model="inventory.cherries">
+                    <input type="number" v-model.number="inventory.cherries">
                   </div>
                 </div>
               </form>
             </div>
             <div class="card-footer">
-              <button class="btn btn-light">Add to cart</button>
+              <button @click="addToCart('cherries', inventory.cherries)" class="btn btn-light">Add to cart</button>
             </div>
           </div>
         </div>
@@ -167,12 +167,22 @@
               pineapples: 0,
               cherries: 0,
             },
+            cart: {
+              carrots: 0,
+              pineapples: 0,
+              cherries: 0,
+            },
           };
+        },
+        methods: {
+          addToCart(type, quantity) {
+            this.cart[type] += quantity;
+            console.log(this.cart);
+          }
         },
       });
 
       app.mount("#app");
     </script>
-
   </body>
 </html>
