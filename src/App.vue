@@ -19,7 +19,53 @@
   </header>
 
   <router-view/>
+
+  <SidebarComponent
+    v-if="showSidebar"
+    :toggle="toggleSidebar"
+    :cart="cart"
+    :inventory="inventory"
+    :remove="removeItem"
+  />
 </template>
+
+<script lang="ts">
+import { defineComponent } from 'vue'
+import SidebarComponent from '@/components/SidebarComponent.vue'
+
+export default defineComponent({
+  components: {
+    SidebarComponent
+  },
+  data () {
+    return {
+      showSidebar: true,
+      inventory: food
+    }
+  },
+  methods: {
+    addToCart (name, index) {
+      if(!this.cart[name])
+        this.cart[name] = 0;
+
+      this.cart[name] += this.inventory[index].quantity;
+      this.inventory[index].quantity = 0;
+    },
+    toggleSidebar () {
+      this.showSidebar = !this.showSidebar;
+    },
+    removeItem (key) {
+      delete this.cart[key];
+    }
+  },
+  async mounted () {
+    const response = await fetch("./food.json");
+    const data = await response.json();
+    this.inventory = data;
+    this.inventory.forEach(i => i.quantity = 0);
+  }
+})
+</script>
 
 <style lang="scss">
   body {
