@@ -19,9 +19,9 @@
             <span>Past Orders</span>
           </a>
         </nav>
-        <a href="#" class="top-bar-cart-link">
+        <a @click="toggleSidebar" class="top-bar-cart-link">
           <i class="icofont-cart-alt icofont-1x"></i>
-          <span>Cart (0)</span>
+          <span>Cart ({{ Object.keys(cart).length }})</span>
         </a>
       </header>
 
@@ -258,6 +258,19 @@
           </div>
         </div>
       </main>
+
+      <sidebar
+        v-if="showSidebar"
+        :toggle="toggleSidebar"
+        :cart="cart"
+        :inventory="inventory"
+        :remove="removeItem"
+      />
+
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.global.min.js"></script>
+    <script src="../app.js"></script>
+
   </body>
 </html>
