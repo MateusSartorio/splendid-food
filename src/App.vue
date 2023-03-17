@@ -34,13 +34,6 @@ import { defineComponent } from 'vue'
 import SidebarComponent from '@/components/SidebarComponent.vue'
 import food from './food.json'
 
-const newFood = food.map(product => {
-  return {
-    ...product,
-    quantity: 0
-  }
-})
-
 export default defineComponent({
   components: {
     SidebarComponent
@@ -48,18 +41,17 @@ export default defineComponent({
   data () {
     return {
       showSidebar: false,
-      inventory: newFood as any,
+      inventory: food,
       cart: {} as any
     }
   },
   methods: {
-    addToCart (name: string, index: number) {
+    addToCart (name: string, quantity: number) {
       if (!this.cart[name]) {
         this.cart[name] = 0
       }
 
-      this.cart[name] += this.inventory[index].quantity
-      this.inventory[index].quantity = 0
+      this.cart[name] += quantity
     },
     toggleSidebar () {
       this.showSidebar = !this.showSidebar
