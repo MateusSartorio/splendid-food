@@ -52,13 +52,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import food from '../food.json'
 
 export default defineComponent({
   name: 'HomeView',
-  props: ['inventory', 'addToCart'],
-  components: {
-
-  }
+  props: ['inventory', 'addToCart']
 })
 </script>

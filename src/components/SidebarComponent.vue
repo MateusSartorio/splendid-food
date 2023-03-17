@@ -26,7 +26,7 @@
               <td> {{ key }}</td>
               <td>${{ getPrice(key) }}</td>
               <td class="center">{{ quantity }}</td>
-              <td>${{ quantity * getPrice(key) }}</td>
+              <td>${{ (quantity * getPrice(key)).toFixed(2) }}</td>
               <td class="center">
                 <button @click="remove(key)" class="btn btn-light cart-remove">
                   &times;
@@ -45,16 +45,16 @@
   </aside>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   props: ['toggle', 'cart', 'inventory', 'remove'],
   methods: {
-    getPrice (key) {
-      return this.inventory.find(product => product.name === key).price.USD
+    getPrice (key: number) {
+      return this.inventory.find((product: any) => product.name === key).price.USD
     },
     calculateTotal () {
       let sum = 0
-      Object.entries(this.cart).forEach((e, i) => {
+      Object.entries(this.cart).forEach((e: any) => {
         sum += e[1] * this.getPrice(e[0])
       })
 

@@ -14,7 +14,7 @@
     </nav>
     <div @click="toggleSidebar" class="top-bar-cart-link">
       <i class="icofont-cart-alt icofont-1x"></i>
-      <span>Cart ()</span>
+      <span>Cart ({{ calculateTotalItems() }})</span>
     </div>
   </header>
 
@@ -34,6 +34,13 @@ import { defineComponent } from 'vue'
 import SidebarComponent from '@/components/SidebarComponent.vue'
 import food from './food.json'
 
+const newFood = food.map(product => {
+  return {
+    ...product,
+    quantity: 0
+  }
+})
+
 export default defineComponent({
   components: {
     SidebarComponent
@@ -41,7 +48,7 @@ export default defineComponent({
   data () {
     return {
       showSidebar: false,
-      inventory: food as any,
+      inventory: newFood as any,
       cart: {} as any
     }
   },
@@ -59,6 +66,9 @@ export default defineComponent({
     },
     removeItem (key: string) {
       delete this.cart[key]
+    },
+    calculateTotalItems () {
+      return Object.keys(this.cart).length
     }
   }
 })
