@@ -24,9 +24,9 @@
             <tr v-for="(quantity, key, index) in cart" :key="index">
               <td><i class="icofont-carrot icofont-3x"></i></td>
               <td> {{ key }}</td>
-              <td>\${{ getPrice(key) }}</td>
+              <td>${{ getPrice(key) }}</td>
               <td class="center">{{ quantity }}</td>
-              <td>\${{ quantity * getPrice(key) }}</td>
+              <td>${{ quantity * getPrice(key) }}</td>
               <td class="center">
                 <button @click="remove(key)" class="btn btn-light cart-remove">
                   &times;
@@ -37,10 +37,29 @@
         </table>
         <p class="center" v-if="!Object.keys(cart).length"><em>No items in cart</em></p>
         <div class="spread">
-          <span><strong>Total:</strong> \${{ calculateTotal() }}</span>
+          <span><strong>Total:</strong> ${{ calculateTotal() }}</span>
           <button class="btn btn-light">Checkout</button>
         </div>
       </div>
     </div>
   </aside>
 </template>
+
+<script>
+export default {
+  props: ['toggle', 'cart', 'inventory', 'remove'],
+  methods: {
+    getPrice (key) {
+      return this.inventory.find(product => product.name === key).price.USD
+    },
+    calculateTotal () {
+      let sum = 0
+      Object.entries(this.cart).forEach((e, i) => {
+        sum += e[1] * this.getPrice(e[0])
+      })
+
+      return sum.toFixed(2)
+    }
+  }
+}
+</script>

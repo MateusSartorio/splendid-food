@@ -12,13 +12,13 @@
         <span>Past Orders</span>
       </RouterLink>
     </nav>
-    <!-- <RouterLink @click="toggleSidebar" class="top-bar-cart-link"> -->
-    <!--   <i class="icofont-cart-alt icofont-1x"></i> -->
-    <!--   <span>Cart ({{ Object.keys(cart).length }})</span> -->
-    <!-- </RouterLink> -->
+    <div @click="toggleSidebar" class="top-bar-cart-link">
+      <i class="icofont-cart-alt icofont-1x"></i>
+      <span>Cart ()</span>
+    </div>
   </header>
 
-  <router-view/>
+  <router-view :inventory="inventory" :addToCart="addToCart"/>
 
   <SidebarComponent
     v-if="showSidebar"
@@ -32,6 +32,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import SidebarComponent from '@/components/SidebarComponent.vue'
+import food from './food.json'
 
 export default defineComponent({
   components: {
@@ -39,30 +40,26 @@ export default defineComponent({
   },
   data () {
     return {
-      showSidebar: true,
-      inventory: food
+      showSidebar: false,
+      inventory: food as any,
+      cart: {} as any
     }
   },
   methods: {
-    addToCart (name, index) {
-      if(!this.cart[name])
-        this.cart[name] = 0;
+    addToCart (name: string, index: number) {
+      if (!this.cart[name]) {
+        this.cart[name] = 0
+      }
 
-      this.cart[name] += this.inventory[index].quantity;
-      this.inventory[index].quantity = 0;
+      this.cart[name] += this.inventory[index].quantity
+      this.inventory[index].quantity = 0
     },
     toggleSidebar () {
-      this.showSidebar = !this.showSidebar;
+      this.showSidebar = !this.showSidebar
     },
-    removeItem (key) {
-      delete this.cart[key];
+    removeItem (key: string) {
+      delete this.cart[key]
     }
-  },
-  async mounted () {
-    const response = await fetch("./food.json");
-    const data = await response.json();
-    this.inventory = data;
-    this.inventory.forEach(i => i.quantity = 0);
   }
 })
 </script>

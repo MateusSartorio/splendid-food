@@ -5,10 +5,8 @@
         <h1>Splendid Food</h1>
       </div>
     </div>
-
     <main class="wrapper">
       <h2>Recommended</h2>
-
       <div class="recommended">
         <div  v-for="(product, index) in inventory.slice(0, 3)" :key="product.id" class="card">
           <div class="card-title">
@@ -50,7 +48,6 @@
       </div>
     </main>
   </div>
-
 </template>
 
 <script lang="ts">
@@ -59,11 +56,7 @@ import food from '../food.json'
 
 export default defineComponent({
   name: 'HomeView',
-  data () {
-    return {
-      inventory: food
-    }
-  },
+  props: ['inventory', 'addToCart'],
   components: {
 
   }
