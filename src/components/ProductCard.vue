@@ -39,12 +39,12 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="js">
 export default {
   props: ['product', 'index', 'addToCart'],
   data () {
     return {
-      quantity: 0 as number
+      quantity: 0
     }
   },
   methods: {

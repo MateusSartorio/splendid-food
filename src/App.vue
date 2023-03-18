@@ -29,7 +29,7 @@
   />
 </template>
 
-<script lang="ts">
+<script lang="js">
 import { defineComponent } from 'vue'
 import SidebarComponent from '@/components/SidebarComponent.vue'
 import food from './food.json'
@@ -42,11 +42,11 @@ export default defineComponent({
     return {
       showSidebar: false,
       inventory: food,
-      cart: {} as any
+      cart: {}
     }
   },
   methods: {
-    addToCart (name: string, quantity: number) {
+    addToCart (name, quantity) {
       if (!this.cart[name]) {
         this.cart[name] = 0
       }
@@ -56,7 +56,7 @@ export default defineComponent({
     toggleSidebar () {
       this.showSidebar = !this.showSidebar
     },
-    removeItem (key: string) {
+    removeItem (key) {
       delete this.cart[key]
     },
     calculateTotalItems () {

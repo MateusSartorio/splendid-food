@@ -45,16 +45,16 @@
   </aside>
 </template>
 
-<script lang="ts">
+<script lang="js">
 export default {
   props: ['toggle', 'cart', 'inventory', 'remove'],
   methods: {
-    getPrice (key: number) {
-      return this.inventory.find((product: any) => product.name === key).price.USD
+    getPrice (key) {
+      return this.inventory.find(product => product.name === key).price.USD
     },
     calculateTotal () {
       let sum = 0
-      Object.entries(this.cart).forEach((e: any) => {
+      Object.entries(this.cart).forEach(e => {
         sum += e[1] * this.getPrice(e[0])
       })
 
