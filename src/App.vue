@@ -1,22 +1,8 @@
 <template>
-  <header class="top-bar spread">
-    <nav class="top-bar-nav">
-      <RouterLink to="/" class="top-bar-link">
-        <i class="icofont-spoon-and-fork"></i>
-        <span>Home</span>
-      </RouterLink>
-      <RouterLink to="/products" class="top-bar-link">
-        <span>Products</span>
-      </RouterLink>
-      <RouterLink to="/past-orders" class="top-bar-link">
-        <span>Past Orders</span>
-      </RouterLink>
-    </nav>
-    <div @click="toggleSidebar" class="top-bar-cart-link">
-      <i class="icofont-cart-alt icofont-1x"></i>
-      <span>Cart ({{ calculateTotalItems() }})</span>
-    </div>
-  </header>
+  <HeaderComponent
+    :toggleSidebar="toggleSidebar"
+    :calculateTotalItems="calculateTotalItems"
+  />
 
   <router-view :inventory="inventory" :addToCart="addToCart"/>
 
@@ -32,10 +18,12 @@
 <script lang="js">
 import { defineComponent } from 'vue'
 import SidebarComponent from '@/components/SidebarComponent.vue'
+import HeaderComponent from '@/components/HeaderComponent.vue'
 import food from './food.json'
 
 export default defineComponent({
   components: {
+    HeaderComponent,
     SidebarComponent
   },
   data () {
