@@ -4,8 +4,6 @@
     :calculateTotalItems="calculateTotalItems"
   />
 
-  <router-view :inventory="inventory" :addToCart="addToCart"/>
-
   <SidebarComponent
     v-if="showSidebar"
     :toggle="toggleSidebar"
@@ -13,18 +11,25 @@
     :inventory="inventory"
     :remove="removeItem"
   />
+
+  <router-view :inventory="inventory" :addToCart="addToCart"/>
+
+  <FooterComponent/>
 </template>
 
 <script lang="js">
-import { defineComponent } from 'vue'
+
 import SidebarComponent from '@/components/SidebarComponent.vue'
 import HeaderComponent from '@/components/HeaderComponent.vue'
+import FooterComponent from '@/components/FooterComponent.vue'
+
 import food from './food.json'
 
-export default defineComponent({
+export default {
   components: {
     HeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    FooterComponent
   },
   data () {
     return {
@@ -51,7 +56,7 @@ export default defineComponent({
       return Object.keys(this.cart).length
     }
   }
-})
+}
 </script>
 
 <style lang="scss">
