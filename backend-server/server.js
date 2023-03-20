@@ -1,4 +1,4 @@
-import express from "express";
+import express, { json } from "express";
 import router from "./routes/users.js";
 
 function logger(request, response, next) {
@@ -8,15 +8,17 @@ function logger(request, response, next) {
 
 const app = express();
 app.set("view engine", "ejs");
-app.use(logger);
+// app.use(logger);
+app.use(express.static("public"))
+app.use(express.urlencoded({ extended: true }))
 
-app.get("/", (request, response) => {
-    response
-        .status(200)
-        .render("./index", {
-            text: "nice web bro"
-        });
-});
+// app.get("/", logger, (request, response) => {
+//     response
+//         .status(200)
+//         .render("./index", {
+//             text: "nice web bro"
+//         });
+// });
 
 app.use("/users", router);
 

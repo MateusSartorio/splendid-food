@@ -1,4 +1,4 @@
-import express from "express";
+import express, { request } from "express";
 
 const router = express.Router();
 
@@ -6,8 +6,16 @@ router.get("/", (request, response) => {
     response.send("users");
 });
 
+router.post("/", (request, response) => {
+    const a = request.body;
+    console.log(a);
+    response.send("nice");
+});
+
 router.get("/new", (request, response) => {
-    response.send("users list");
+    response.render("users/new", {
+        firstName: "your name in here"
+    });
 });
 
 router.route("/:id")
